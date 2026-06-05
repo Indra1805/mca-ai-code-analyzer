@@ -40,6 +40,13 @@ urlpatterns = [
             "apps.accounts.urls"
         ),
     ),
+
+    path(
+        "analysis/",
+        include(
+            "apps.code_analysis.urls"
+        ),
+    ),
 ]
 
 if settings.DEBUG:

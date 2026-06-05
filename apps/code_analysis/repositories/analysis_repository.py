@@ -14,6 +14,7 @@ class AnalysisRepository:
         return (
             AnalysisHistory.objects
             .filter(user=user)
+            .order_by("-created_at")
         )
 
     @staticmethod

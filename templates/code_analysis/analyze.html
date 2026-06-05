@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Analyze Code
+{% endblock %}
+
+{% block content %}
+
+<div class="card shadow-sm">
+
+    <div class="card-header">
+        <h3>Analyze Source Code</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Analyze Code
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+{% endblock %}

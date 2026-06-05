@@ -1,0 +1,62 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Analysis Result
+{% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">
+    Analysis Result
+</h2>
+
+<div class="card mb-3">
+    <div class="card-header">
+        Detected Errors
+    </div>
+
+    <div class="card-body">
+        <pre>{{ analysis.detected_errors }}</pre>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        Explanation
+    </div>
+
+    <div class="card-body">
+        <pre>{{ analysis.explanation }}</pre>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        Corrected Code
+    </div>
+
+    <div class="card-body">
+        <pre>{{ analysis.corrected_code }}</pre>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header">
+        Best Practices
+    </div>
+
+    <div class="card-body">
+        <pre>{{ analysis.best_practices }}</pre>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        Confidence Score:
+        <strong>
+            {{ analysis.confidence_score }}%
+        </strong>
+    </div>
+</div>
+
+{% endblock %}
