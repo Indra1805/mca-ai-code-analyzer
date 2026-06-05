@@ -222,3 +222,9 @@ LOGIN_URL = "accounts:login"
 LOGIN_REDIRECT_URL = "dashboard:home"
 
 LOGOUT_REDIRECT_URL = "accounts:login"
+
+
+GEMINI_MODEL = os.getenv(
+    "GEMINI_MODEL",
+    "models/gemini-2.5-flash"
+)

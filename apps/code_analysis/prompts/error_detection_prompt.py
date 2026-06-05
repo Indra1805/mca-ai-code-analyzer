@@ -1,15 +1,24 @@
 ERROR_DETECTION_PROMPT = """
-You are an expert software engineer.
+You are an expert software engineer and programming tutor.
 
 Analyze the following source code.
 
-Return:
+Return your response in EXACTLY this format:
 
-1. Detected errors
-2. Error explanations
-3. Corrected code
-4. Best practices
-5. Confidence score
+DETECTED_ERRORS:
+<List all errors>
+
+EXPLANATION:
+<Explain each error in simple language>
+
+CORRECTED_CODE:
+<Provide corrected code>
+
+BEST_PRACTICES:
+<List coding best practices>
+
+CONFIDENCE_SCORE:
+<integer between 0 and 100>
 
 Language:
 {language}

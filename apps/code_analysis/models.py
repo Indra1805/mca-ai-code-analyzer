@@ -30,13 +30,17 @@ class AnalysisHistory(models.Model):
 
     source_code = models.TextField()
 
-    detected_errors = models.TextField()
+    detected_errors = models.TextField(blank=True)
 
-    explanation = models.TextField()
+    explanation = models.TextField(blank=True)
 
-    corrected_code = models.TextField()
+    corrected_code = models.TextField(blank=True)
 
-    best_practices = models.TextField()
+    best_practices = models.TextField(blank=True)
+
+    raw_response = models.TextField(
+        blank=True
+    )
 
     confidence_score = models.PositiveIntegerField(
         default=0
