@@ -1,0 +1,123 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="mb-4">
+    <h2 class="fw-bold">
+        Welcome, {{ user.username }}
+    </h2>
+
+    <p class="text-muted">
+        AI-Powered Multi-Language Code Error Detection and Explanation System
+    </p>
+</div>
+
+<div class="row g-4">
+
+    <!-- Total Analyses -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Total Analyses
+                </h6>
+
+                <h1 class="fw-bold">
+                    {{ total_analyses }}
+                </h1>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Languages Used -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Languages Used
+                </h6>
+
+                <h1 class="fw-bold">
+                    {{ languages_used }}
+                </h1>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Reports Generated -->
+    <div class="col-md-4">
+        <div class="card shadow-sm border-0 h-100">
+
+            <div class="card-body text-center">
+
+                <h6 class="text-muted">
+                    Reports Generated
+                </h6>
+
+                <h1 class="fw-bold">
+                    {{ reports_generated }}
+                </h1>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<hr class="my-5">
+
+<div class="card border-0 shadow-sm">
+
+    <div class="card-body">
+
+        <h4 class="mb-3">
+            Quick Actions
+        </h4>
+
+        <div class="d-flex gap-2 flex-wrap">
+
+            <button
+                class="btn btn-primary"
+                disabled
+            >
+                Analyze Code
+            </button>
+
+            <button
+                class="btn btn-outline-secondary"
+                disabled
+            >
+                View History
+            </button>
+
+            <button
+                class="btn btn-outline-success"
+                disabled
+            >
+                Generate Report
+            </button>
+
+        </div>
+
+        <small class="text-muted d-block mt-3">
+            These features will be enabled in upcoming modules.
+        </small>
+
+    </div>
+
+</div>
+
+{% endblock %}

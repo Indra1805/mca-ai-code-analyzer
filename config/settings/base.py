@@ -37,6 +37,7 @@ DJANGO_APPS = [
 ]
 
 LOCAL_APPS = [
+    "apps.common",
     "apps.accounts",
     "apps.code_analysis",
     "apps.dashboard",
@@ -152,6 +153,12 @@ USE_I18N = True
 
 USE_TZ = True
 
+SESSION_COOKIE_HTTPONLY = True
+
+CSRF_COOKIE_HTTPONLY = True
+
+X_FRAME_OPTIONS = "DENY"
+
 # --------------------------------------------------
 # STATIC FILES
 # --------------------------------------------------
@@ -205,3 +212,13 @@ LOGGING = {
         "level": "INFO",
     },
 }
+
+AUTH_USER_MODEL = "accounts.User"
+
+
+
+LOGIN_URL = "accounts:login"
+
+LOGIN_REDIRECT_URL = "dashboard:home"
+
+LOGOUT_REDIRECT_URL = "accounts:login"
