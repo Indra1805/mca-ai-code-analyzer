@@ -4,6 +4,8 @@ from django.db import models
 # Create your models here.
 
 
+
+
 class AnalysisHistory(models.Model):
     """
     Stores code analysis results.
@@ -16,6 +18,18 @@ class AnalysisHistory(models.Model):
         CPP = "C++", "C++"
         JAVASCRIPT = "JavaScript", "JavaScript"
         GO = "Go", "Go"
+
+    class AnalysisStatus(models.TextChoices):
+
+        SUCCESS = (
+            "SUCCESS",
+            "Success",
+        )
+
+        FAILED = (
+            "FAILED",
+            "Failed",
+        )
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -44,6 +58,20 @@ class AnalysisHistory(models.Model):
 
     confidence_score = models.PositiveIntegerField(
         default=0
+    )
+
+    report_download_count = models.PositiveIntegerField(
+        default=0
+    )
+
+    analysis_duration_ms = models.PositiveIntegerField(
+        default=0
+    )
+
+    analysis_status = models.CharField(
+        max_length=20,
+        choices=AnalysisStatus.choices,
+        default=AnalysisStatus.SUCCESS,
     )
 
     created_at = models.DateTimeField(

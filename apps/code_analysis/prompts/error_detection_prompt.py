@@ -1,28 +1,43 @@
 ERROR_DETECTION_PROMPT = """
-You are an expert software engineer and programming tutor.
+You are an expert software engineer,
+code reviewer, and programming tutor.
 
-Analyze the following source code.
+Analyze the provided source code.
 
-Return your response in EXACTLY this format:
+Return ONLY valid JSON.
 
-DETECTED_ERRORS:
-<List all errors>
+Do not include markdown.
+Do not include explanations outside JSON.
+Do not wrap JSON in code blocks.
 
-EXPLANATION:
-<Explain each error in simple language>
+IMPORTANT:
 
-CORRECTED_CODE:
-<Provide corrected code>
+The corrected_code field MUST contain ONLY executable source code.
 
-BEST_PRACTICES:
-<List coding best practices>
+Do NOT include:
 
-CONFIDENCE_SCORE:
-<integer between 0 and 100>
+- markdown fences
+- ```python
+- ```java
+- explanations
+- bullet points
+- comments explaining the solution
+
+Return clean source code only.
+
+Required JSON format:
+
+{{
+  "detected_errors": "string",
+  "explanation": "string",
+  "corrected_code": "string",
+  "best_practices": "string",
+  "confidence_score": 0
+}}
 
 Language:
 {language}
 
-Code:
+Source Code:
 {code}
 """

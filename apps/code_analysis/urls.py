@@ -22,4 +22,10 @@ urlpatterns = [
         views.analysis_detail_view,
         name="detail",
     ),
+
+    path(
+        "delete/<int:analysis_id>/",
+        views.delete_analysis_view,
+        name="delete",
+    ),
 ]

@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-History
+Analysis History
 {% endblock %}
 
 {% block content %}
@@ -10,20 +10,102 @@ History
     Analysis History
 </h2>
 
-<table class="table table-striped">
+<div class="card mb-4">
+
+    <div class="card-body">
+
+        <form method="get">
+
+            <div class="row">
+
+                <div class="col-md-5">
+
+                    <input
+                        type="text"
+                        name="q"
+                        value="{{ query }}"
+                        class="form-control"
+                        placeholder="Search code..."
+                    >
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <select
+                        name="language"
+                        class="form-select"
+                    >
+
+                        <option value="">
+                            All Languages
+                        </option>
+
+                        <option value="Python">
+                            Python
+                        </option>
+
+                        <option value="Java">
+                            Java
+                        </option>
+
+                        <option value="C">
+                            C
+                        </option>
+
+                        <option value="C++">
+                            C++
+                        </option>
+
+                        <option value="JavaScript">
+                            JavaScript
+                        </option>
+
+                        <option value="Go">
+                            Go
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <button
+                        class="btn btn-primary w-100"
+                        type="submit"
+                    >
+                        Filter
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<table class="table table-bordered">
 
     <thead>
+
         <tr>
+
             <th>ID</th>
             <th>Language</th>
             <th>Date</th>
-            <th></th>
+            <th>Actions</th>
+
         </tr>
+
     </thead>
 
     <tbody>
 
-        {% for analysis in analyses %}
+        {% for analysis in page_obj %}
 
         <tr>
 
@@ -48,6 +130,13 @@ History
                     View
                 </a>
 
+                <a
+                    href="{% url 'code_analysis:delete' analysis.id %}"
+                    class="btn btn-sm btn-danger"
+                >
+                    Delete
+                </a>
+
             </td>
 
         </tr>
@@ -67,5 +156,53 @@ History
     </tbody>
 
 </table>
+
+<nav>
+
+    <ul class="pagination">
+
+        {% if page_obj.has_previous %}
+
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ page_obj.previous_page_number }}"
+            >
+                Previous
+            </a>
+
+        </li>
+
+        {% endif %}
+
+        <li class="page-item active">
+
+            <span class="page-link">
+
+                {{ page_obj.number }}
+
+            </span>
+
+        </li>
+
+        {% if page_obj.has_next %}
+
+        <li class="page-item">
+
+            <a
+                class="page-link"
+                href="?page={{ page_obj.next_page_number }}"
+            >
+                Next
+            </a>
+
+        </li>
+
+        {% endif %}
+
+    </ul>
+
+</nav>
 
 {% endblock %}

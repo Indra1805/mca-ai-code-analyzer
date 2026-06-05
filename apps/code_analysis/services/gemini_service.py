@@ -53,9 +53,9 @@ class GeminiService:
         except Exception as exc:
 
             logger.exception(
-                f"Gemini API Error: {exc}"
+                f"Gemini analysis failed: {exc}"
             )
 
             raise RuntimeError(
-                "Unable to analyze code."
+                f"Gemini analysis failed: {exc}"
             ) from exc

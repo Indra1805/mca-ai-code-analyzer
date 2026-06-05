@@ -59,4 +59,15 @@ Analysis Result
     </div>
 </div>
 
+<div class="mt-4">
+
+    <a
+        href="{% url 'reports:download' analysis.id %}"
+        class="btn btn-success"
+    >
+        Download PDF Report
+    </a>
+
+</div>
+
 {% endblock %}

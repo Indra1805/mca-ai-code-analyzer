@@ -47,6 +47,13 @@ urlpatterns = [
             "apps.code_analysis.urls"
         ),
     ),
+
+    path(
+        "reports/",
+        include(
+            "apps.reports.urls"
+        ),
+    ),
 ]
 
 if settings.DEBUG:
