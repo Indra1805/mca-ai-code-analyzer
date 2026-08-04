@@ -6,6 +6,10 @@ from apps.dashboard.repositories.analytics_repository import (
     AnalyticsRepository,
 )
 
+from apps.dashboard.services.chart_service import (
+    ChartService,
+)
+
 
 class DashboardService:
 
@@ -46,6 +50,18 @@ class DashboardService:
 
             "language_distribution":
                 AnalyticsRepository.language_distribution(
+                    user
+                ),
+
+            "language_chart":
+                ChartService
+                .get_language_chart_data(
+                    user
+                ),
+
+            "status_chart":
+                ChartService
+                .get_status_chart_data(
                     user
                 ),
         }

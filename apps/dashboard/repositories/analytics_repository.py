@@ -5,6 +5,7 @@ from apps.code_analysis.models import (
     AnalysisHistory,
 )
 
+from django.db.models import Count
 
 class AnalyticsRepository:
 
@@ -46,6 +47,20 @@ class AnalyticsRepository:
                 avg=Avg(
                     "analysis_duration_ms"
                 )
+            )
+        )
+
+    @staticmethod
+    def status_distribution(user,):
+
+        return (
+            AnalysisHistory.objects
+            .filter(user=user)
+            .values(
+                "analysis_status"
+            )
+            .annotate(
+                total=Count("id")
             )
         )
 

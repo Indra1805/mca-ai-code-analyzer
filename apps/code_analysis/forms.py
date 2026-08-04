@@ -1,24 +1,31 @@
 from django import forms
 
-from apps.code_analysis.models import (
-    AnalysisHistory
-)
+from apps.code_analysis.models import AnalysisHistory
 
 
 class CodeAnalysisForm(forms.Form):
+    """
+    Form for submitting source code for AI analysis.
+    """
 
     language = forms.ChoiceField(
-        choices=(
-            AnalysisHistory
-            .LanguageChoices
-            .choices
-        )
+        label="Programming Language",
+        choices=AnalysisHistory.LanguageChoices.choices,
+        widget=forms.Select(
+            attrs={
+                "class": "form-select",
+            }
+        ),
     )
 
     source_code = forms.CharField(
+        label="Source Code",
         widget=forms.Textarea(
             attrs={
-                "rows": 15
+                "class": "form-control code-editor",
+                "id": "sourceCode",
+                "spellcheck": "false",
+                "placeholder": "Paste or type your source code here...",
             }
-        )
+        ),
     )

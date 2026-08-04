@@ -1,0 +1,71 @@
+Python
+------
+def find_max(numbers):
+
+    maximum = 0
+
+    for number in numbers:
+
+        if number > maximum:
+
+            maximum = number
+
+    return max_value
+
+
+Java
+----
+public class Main {
+
+    public static void main(String[] args){
+
+        int total = 100;
+
+        int students = 0;
+
+        System.out.println(total / students);
+
+    }
+
+}
+
+C
+-
+#include<stdio.h>
+
+int main(){
+
+    int arr[5]={1,2,3,4,5};
+
+    printf("%d",arr[5]);
+
+    return 0;
+
+}
+
+JavaScript
+----------
+function calculate(){
+
+    let total=100;
+
+    console.log(price);
+
+}
+
+calculate();
+
+
+Go
+--
+package main
+
+import "fmt"
+
+func main(){
+
+    var numbers []int
+
+    fmt.Println(numbers[10])
+
+}

@@ -54,6 +54,13 @@ urlpatterns = [
             "apps.reports.urls"
         ),
     ),
+
+    path(
+        "administration/",
+        include(
+            "apps.administration.urls"
+        ),
+    ),
 ]
 
 if settings.DEBUG:

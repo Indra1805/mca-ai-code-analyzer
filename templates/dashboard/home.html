@@ -149,6 +149,64 @@ Dashboard
 
 </div>
 
+<div class="row g-4 mb-5 d-flex justify-content-center">
+
+    <!-- Language Distribution -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow-sm border-0 h-60">
+
+            <div class="card-header bg-white">
+
+                <h5 class="mb-0">
+                    Language Distribution
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas
+                    id="languageChart"
+                    height="250"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Analysis Status -->
+
+    <div class="col-lg-4">
+
+        <div class="card shadow-sm border-0 h-60">
+
+            <div class="card-header bg-white">
+
+                <h5 class="mb-0">
+                    Analysis Status
+                </h5>
+
+            </div>
+
+            <div class="card-body">
+
+                <canvas
+                    id="statusChart"
+                    height="250"
+                ></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
 <!-- Recent Analyses -->
 <div class="card shadow-sm border-0 mb-5">
 
@@ -294,5 +352,141 @@ Dashboard
     </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const languageLabels =
+            {{ language_chart.labels|safe }};
+
+        const languageValues =
+            {{ language_chart.values|safe }};
+
+        const statusLabels =
+            {{ status_chart.labels|safe }};
+
+        const statusValues =
+            {{ status_chart.values|safe }};
+
+        // ----------------------------
+        // Language Distribution Chart
+        // ----------------------------
+
+        const languageCtx =
+            document.getElementById(
+                "languageChart"
+            );
+
+        if (
+            languageCtx &&
+            languageValues.length > 0
+        ) {
+
+            new Chart(
+                languageCtx,
+                {
+                    type: "pie",
+
+                    data: {
+
+                        labels:
+                            languageLabels,
+
+                        datasets: [
+                            {
+                                data:
+                                    languageValues,
+
+                                backgroundColor: [
+                                    "#0d6efd",
+                                    "#198754",
+                                    // "#dc3154",
+                                    "#ffc107",
+                                    "#6f42c1",
+                                    "#20c997",
+                                ],
+
+                                borderWidth: 1,
+                            }
+                        ],
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        plugins: {
+
+                            legend: {
+                                position: "bottom",
+                            },
+                        },
+                    },
+                }
+            );
+        }
+
+        // ----------------------------
+        // Status Chart
+        // ----------------------------
+
+        const statusCtx =
+            document.getElementById(
+                "statusChart"
+            );
+
+        if (
+            statusCtx &&
+            statusValues.length > 0
+        ) {
+
+            new Chart(
+                statusCtx,
+                {
+                    type: "doughnut",
+
+                    data: {
+
+                        labels:
+                            statusLabels,
+
+                        datasets: [
+                            {
+                                data:
+                                    statusValues,
+
+                                backgroundColor: [
+                                    "#198754",
+                                    "#dc3545",
+                                ],
+
+                                borderWidth: 1,
+                            }
+                        ],
+                    },
+
+                    options: {
+
+                        responsive: true,
+
+                        plugins: {
+
+                            legend: {
+                                position: "bottom",
+                            },
+                        },
+                    },
+                }
+            );
+        }
+    }
+);
+
+</script>
 
 {% endblock %}

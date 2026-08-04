@@ -42,6 +42,7 @@ LOCAL_APPS = [
     "apps.code_analysis",
     "apps.dashboard",
     "apps.reports",
+    "apps.administration",
 ]
 
 THIRD_PARTY_APPS = []
