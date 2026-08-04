@@ -12,4 +12,16 @@ urlpatterns = [
         name="dashboard",
     ),
 
+    path(
+        "users/",
+        views.users_view,
+        name="users",
+    ),
+
+    path(
+        "users/<int:pk>/",
+        views.user_detail_view,
+        name="user_detail",
+    ),
+
 ]

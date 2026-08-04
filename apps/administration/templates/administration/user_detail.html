@@ -1,0 +1,274 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+User Details
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+
+            User Details
+
+        </h2>
+
+        <a
+            href="{% url 'administration:users' %}"
+            class="btn btn-secondary"
+        >
+            Back
+        </a>
+
+    </div>
+
+    <div class="card shadow-sm border-0">
+
+        <div class="card-header bg-dark text-white">
+
+            <h5 class="mb-0">
+
+                {{ profile_user.username }}
+
+            </h5>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered align-middle mb-0">
+
+                    <tbody>
+
+                        <tr>
+
+                            <th width="30%">
+                                User ID
+                            </th>
+
+                            <td>
+                                {{ profile_user.id }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Username
+                            </th>
+
+                            <td>
+                                {{ profile_user.username }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <td>
+                                {{ profile_user.email|default:"Not Available" }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                First Name
+                            </th>
+
+                            <td>
+                                {{ profile_user.first_name|default:"Not Available" }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Last Name
+                            </th>
+
+                            <td>
+                                {{ profile_user.last_name|default:"Not Available" }}
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <td>
+
+                                {% if profile_user.is_active %}
+
+                                    <span class="badge bg-success">
+
+                                        Active
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-danger">
+
+                                        Inactive
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Staff User
+                            </th>
+
+                            <td>
+
+                                {% if profile_user.is_staff %}
+
+                                    <span class="badge bg-primary">
+
+                                        Yes
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+
+                                        No
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Superuser
+                            </th>
+
+                            <td>
+
+                                {% if profile_user.is_superuser %}
+
+                                    <span class="badge bg-danger">
+
+                                        Yes
+
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-secondary">
+
+                                        No
+
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Date Joined
+                            </th>
+
+                            <td>
+
+                                {{ profile_user.created_at|date:"d M Y H:i" }}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Last Updated
+                            </th>
+
+                            <td>
+
+                                {{ profile_user.updated_at|date:"d M Y H:i" }}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Last Login
+                            </th>
+
+                            <td>
+
+                                {% if profile_user.last_login %}
+
+                                    {{ profile_user.last_login|date:"d M Y H:i" }}
+
+                                {% else %}
+
+                                    Never Logged In
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>
+                                Total Analyses
+                            </th>
+
+                            <td>
+
+                                {{ profile_user.analyses.count }}
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,5 +1,5 @@
 from apps.administration.repositories.dashboard_repository import (
-    DashboardRepository,
+    DashboardRepository, UserRepository,
 )
 
 
@@ -35,3 +35,25 @@ class DashboardService:
                 DashboardRepository.get_most_used_language(),
 
         }
+    
+
+
+
+
+class UserService:
+
+    @staticmethod
+    def get_users(
+        search=None,
+        status=None,
+    ):
+
+        return UserRepository.get_users(
+            search=search,
+            status=status,
+        )
+
+    @staticmethod
+    def get_user(pk):
+
+        return UserRepository.get_user(pk)

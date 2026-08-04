@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Avg
 from django.db.models import Count
 from django.db.models import Sum
+from django.db.models import Q
 
 from apps.code_analysis.models import AnalysisHistory
 
@@ -90,3 +91,64 @@ class DashboardRepository:
             return language["language"]
 
         return "-"
+
+
+
+class UserRepository:
+
+    @staticmethod
+    def get_users(
+        search=None,
+        status=None,
+    ):
+
+        queryset = (
+            User.objects
+            .annotate(
+                analysis_count=Count(
+                    "analyses"
+                )
+            )
+            .order_by(
+                "-created_at"
+            )
+        )
+
+        if search:
+
+            queryset = queryset.filter(
+                Q(username__icontains=search)
+                |
+                Q(email__icontains=search)
+                |
+                Q(first_name__icontains=search)
+                |
+                Q(last_name__icontains=search)
+            )
+
+        if status == "active":
+
+            queryset = queryset.filter(
+                is_active=True
+            )
+
+        elif status == "inactive":
+
+            queryset = queryset.filter(
+                is_active=False
+            )
+
+        return queryset
+
+    @staticmethod
+    def get_user(pk):
+
+        return (
+            User.objects
+            .annotate(
+                analysis_count=Count(
+                    "analyses"
+                )
+            )
+            .get(pk=pk)
+        )
