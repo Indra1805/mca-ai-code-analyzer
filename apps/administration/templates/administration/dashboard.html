@@ -6,37 +6,187 @@ Administration Dashboard
 
 {% block content %}
 
-<div class="container mt-4">
+<div class="container">
 
-    <div class="card shadow-sm">
+    <div class="mb-5">
 
-        <div class="card-body">
+        <h2 class="fw-bold">
 
-            <h2 class="fw-bold">
+            Administration Dashboard
 
-                Administration Dashboard
+        </h2>
 
-            </h2>
+        <p class="text-muted">
 
-            <hr>
+            System-wide analytics and monitoring.
 
-            <p class="lead">
+        </p>
 
-                Welcome,
+    </div>
 
-                <strong>
+    <div class="row g-4">
 
-                    {{ request.user.username }}
+        <div class="col-md-3">
 
-                </strong>
+            <div class="card shadow-sm h-100">
 
-            </p>
+                <div class="card-body text-center">
 
-            <p>
+                    <h6>Total Users</h6>
 
-                This dashboard is accessible only to staff users.
+                    <h2>
 
-            </p>
+                        {{ total_users }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Analyses</h6>
+
+                    <h2>
+
+                        {{ total_analyses }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Successful</h6>
+
+                    <h2 class="text-success">
+
+                        {{ successful_analyses }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Failed</h6>
+
+                    <h2 class="text-danger">
+
+                        {{ failed_analyses }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row g-4 mt-2">
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Avg Confidence</h6>
+
+                    <h2>
+
+                        {{ average_confidence|floatformat:0 }}%
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Avg Duration</h6>
+
+                    <h2>
+
+                        {{ average_duration|floatformat:0 }} ms
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Downloads</h6>
+
+                    <h2>
+
+                        {{ total_downloads }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <h6>Most Used Language</h6>
+
+                    <h2>
+
+                        {{ most_used_language }}
+
+                    </h2>
+
+                </div>
+
+            </div>
 
         </div>
 
