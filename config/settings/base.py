@@ -67,6 +67,43 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+
+# --------------------------------------------------
+# SECURITY SETTINGS
+# --------------------------------------------------
+
+SESSION_COOKIE_HTTPONLY = True
+
+CSRF_COOKIE_HTTPONLY = True
+
+X_FRAME_OPTIONS = "DENY"
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+SECURE_BROWSER_XSS_FILTER = True
+
+SECURE_REFERRER_POLICY = "same-origin"
+
+
+# --------------------------------------------------
+# HTTP SETTINGS
+# --------------------------------------------------
+
+
+if not DEBUG:
+
+    SECURE_SSL_REDIRECT = True
+
+    SESSION_COOKIE_SECURE = True
+
+    CSRF_COOKIE_SECURE = True
+
+    SECURE_HSTS_SECONDS = 31536000
+
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+    SECURE_HSTS_PRELOAD = True
+
 # --------------------------------------------------
 # URL CONFIG
 # --------------------------------------------------
@@ -202,21 +239,66 @@ if not GEMINI_API_KEY:
 # --------------------------------------------------
 
 LOGGING = {
+
     "version": 1,
+
     "disable_existing_loggers": False,
+
+    "formatters": {
+
+        "standard": {
+
+            "format": (
+                "[{levelname}] "
+                "{asctime} "
+                "{name}: "
+                "{message}"
+            ),
+
+            "style": "{",
+
+        },
+
+    },
+
     "handlers": {
+
         "file": {
+
+            "level": "INFO",
+
             "class": "logging.FileHandler",
-            "filename": BASE_DIR / "logs/application.log",
+
+            "filename": BASE_DIR / "logs" / "application.log",
+
+            "formatter": "standard",
+
         },
+
         "console": {
+
             "class": "logging.StreamHandler",
+
+            "formatter": "standard",
+
         },
+
     },
+
     "root": {
-        "handlers": ["console", "file"],
+
+        "handlers": [
+
+            "console",
+
+            "file",
+
+        ],
+
         "level": "INFO",
+
     },
+
 }
 
 AUTH_USER_MODEL = "accounts.User"
