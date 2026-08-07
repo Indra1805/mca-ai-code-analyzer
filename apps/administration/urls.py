@@ -42,4 +42,10 @@ urlpatterns = [
         name="delete_analysis",
     ),
 
+    path(
+        "analytics/",
+        views.analytics_view,
+        name="analytics",
+    ),
+
 ]

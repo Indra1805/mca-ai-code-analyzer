@@ -1,0 +1,303 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+System Analytics
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="mb-4">
+
+        <h2 class="fw-bold">
+
+            System Analytics
+
+        </h2>
+
+        <p class="text-muted">
+
+            Overall analytics of the AI Code Analyzer.
+
+        </p>
+
+    </div>
+
+    <div class="row g-4 mb-4">
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>
+
+                        Average Confidence
+
+                    </h6>
+
+                    <h2>
+
+                        {{ average_confidence|floatformat:0 }}%
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>
+
+                        Average Duration
+
+                    </h6>
+
+                    <h2>
+
+                        {{ average_duration|floatformat:0 }} ms
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-body text-center">
+
+                    <h6>
+
+                        Total Downloads
+
+                    </h6>
+
+                    <h2>
+
+                        {{ total_downloads }}
+
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    Language Distribution
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-striped">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Language</th>
+
+                                <th>Total</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for item in language_distribution %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ item.language }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ item.total }}
+
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+
+                                <td colspan="2">
+
+                                    No data available.
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-6 mb-4">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header">
+
+                    Success / Failure
+
+                </div>
+
+                <div class="card-body">
+
+                    <table class="table table-striped">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>Status</th>
+
+                                <th>Total</th>
+
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            {% for item in status_distribution %}
+
+                            <tr>
+
+                                <td>
+
+                                    {{ item.analysis_status }}
+
+                                </td>
+
+                                <td>
+
+                                    {{ item.total }}
+
+                                </td>
+
+                            </tr>
+
+                            {% empty %}
+
+                            <tr>
+
+                                <td colspan="2">
+
+                                    No data available.
+
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            Analysis Trend (Last 7 Days)
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+
+                        <th>Total Analyses</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for item in trend %}
+
+                    <tr>
+
+                        <td>
+
+                            {{ item.date }}
+
+                        </td>
+
+                        <td>
+
+                            {{ item.count }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

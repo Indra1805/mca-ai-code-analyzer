@@ -14,7 +14,11 @@ from django.contrib import messages
 from django.shortcuts import redirect
 
 from apps.administration.services.analysis_service import (
-    AnalysisService,
+    AnalysisService
+)
+
+from apps.administration.services.analytics_service import (
+    AnalyticsService,
 )
 
 from apps.code_analysis.models import AnalysisHistory
@@ -157,4 +161,18 @@ def delete_analysis_view(
 
     return redirect(
         "administration:analyses"
+    )
+
+
+@staff_member_required
+def analytics_view(request):
+
+    context = (
+        AnalyticsService.get_analytics()
+    )
+
+    return render(
+        request,
+        "administration/analytics.html",
+        context,
     )
