@@ -1,0 +1,244 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Analysis Management
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+
+            Analysis Management
+
+        </h2>
+
+    </div>
+
+    <form method="get" class="row g-3 mb-4">
+
+        <div class="col-md-4">
+
+            <input
+                type="text"
+                class="form-control"
+                name="search"
+                placeholder="Search username..."
+                value="{{ search }}"
+            >
+
+        </div>
+
+        <div class="col-md-3">
+
+            <select
+                class="form-select"
+                name="language"
+            >
+
+                <option value="">
+
+                    All Languages
+
+                </option>
+
+                {% for lang,value in languages.choices %}
+
+                <option
+                    value="{{ lang }}"
+                    {% if language == lang %}
+                    selected
+                    {% endif %}
+                >
+
+                    {{ value }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <select
+                class="form-select"
+                name="status"
+            >
+
+                <option value="">
+
+                    All Status
+
+                </option>
+
+                <option
+                    value="SUCCESS"
+                    {% if status == "SUCCESS" %}
+                    selected
+                    {% endif %}
+                >
+
+                    Success
+
+                </option>
+
+                <option
+                    value="FAILED"
+                    {% if status == "FAILED" %}
+                    selected
+                    {% endif %}
+                >
+
+                    Failed
+
+                </option>
+
+            </select>
+
+        </div>
+
+        <div class="col-md-2">
+
+            <button
+                class="btn btn-primary w-100"
+            >
+
+                Search
+
+            </button>
+
+        </div>
+
+    </form>
+
+    <div class="table-responsive">
+
+        <table class="table table-hover align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>User</th>
+
+                    <th>Language</th>
+
+                    <th>Status</th>
+
+                    <th>Confidence</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for analysis in analyses %}
+
+                <tr>
+
+                    <td>
+
+                        {{ analysis.id }}
+
+                    </td>
+
+                    <td>
+
+                        {{ analysis.user.username }}
+
+                    </td>
+
+                    <td>
+
+                        {{ analysis.language }}
+
+                    </td>
+
+                    <td>
+
+                        {% if analysis.analysis_status == "SUCCESS" %}
+
+                        <span class="badge bg-success">
+
+                            Success
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="badge bg-danger">
+
+                            Failed
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+
+                        {{ analysis.confidence_score }}%
+
+                    </td>
+
+                    <td>
+
+                        {{ analysis.created_at|date:"d M Y" }}
+
+                    </td>
+
+                    <td>
+
+                        <a
+                            href="{% url 'administration:analysis_detail' analysis.id %}"
+                            class="btn btn-outline-primary btn-sm"
+                        >
+
+                            View
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td
+                        colspan="7"
+                        class="text-center"
+                    >
+
+                        No analyses found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

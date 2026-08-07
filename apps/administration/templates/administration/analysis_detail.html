@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Analysis Details
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+
+            <h4>
+
+                Analysis #{{ analysis.id }}
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <p><strong>User:</strong> {{ analysis.user.username }}</p>
+
+            <p><strong>Language:</strong> {{ analysis.language }}</p>
+
+            <p><strong>Status:</strong> {{ analysis.analysis_status }}</p>
+
+            <p><strong>Confidence:</strong> {{ analysis.confidence_score }}%</p>
+
+            <p><strong>Duration:</strong> {{ analysis.analysis_duration_ms }} ms</p>
+
+            <hr>
+
+            <h5>Source Code</h5>
+
+            <pre>{{ analysis.source_code }}</pre>
+
+            <h5>Detected Errors</h5>
+
+            <pre>{{ analysis.detected_errors }}</pre>
+
+            <h5>Explanation</h5>
+
+            <pre>{{ analysis.explanation }}</pre>
+
+            <h5>Corrected Code</h5>
+
+            <pre>{{ analysis.corrected_code }}</pre>
+
+            <h5>Best Practices</h5>
+
+            <pre>{{ analysis.best_practices }}</pre>
+
+            <hr>
+
+            <a
+                href="{% url 'administration:delete_analysis' analysis.id %}"
+                class="btn btn-danger"
+                onclick="return confirm('Delete this analysis?');"
+            >
+
+                Delete Analysis
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

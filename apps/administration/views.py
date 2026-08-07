@@ -10,6 +10,15 @@ from apps.administration.services.dashboard_service import (
     DashboardService, UserService,
 )
 
+from django.contrib import messages
+from django.shortcuts import redirect
+
+from apps.administration.services.analysis_service import (
+    AnalysisService,
+)
+
+from apps.code_analysis.models import AnalysisHistory
+
 User = get_user_model()
 
 
@@ -71,4 +80,81 @@ def user_detail_view(
         {
             "profile_user": user,
         },
+    )
+
+
+
+@staff_member_required
+def analyses_view(request):
+
+    search = request.GET.get(
+        "search",
+        "",
+    )
+
+    language = request.GET.get(
+        "language",
+        "",
+    )
+
+    status = request.GET.get(
+        "status",
+        "",
+    )
+
+    analyses = (
+        AnalysisService.get_analyses(
+            search=search,
+            language=language,
+            status=status,
+        )
+    )
+
+    return render(
+        request,
+        "administration/analyses.html",
+        {
+            "analyses": analyses,
+            "languages": AnalysisHistory.LanguageChoices,
+            "search": search,
+            "language": language,
+            "status": status,
+        },
+    )
+
+
+@staff_member_required
+def analysis_detail_view(
+    request,
+    pk,
+):
+
+    analysis = (
+        AnalysisService.get_analysis(pk)
+    )
+
+    return render(
+        request,
+        "administration/analysis_detail.html",
+        {
+            "analysis": analysis,
+        },
+    )
+
+
+@staff_member_required
+def delete_analysis_view(
+    request,
+    pk,
+):
+
+    AnalysisService.delete_analysis(pk)
+
+    messages.success(
+        request,
+        "Analysis deleted successfully.",
+    )
+
+    return redirect(
+        "administration:analyses"
     )

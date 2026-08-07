@@ -24,4 +24,22 @@ urlpatterns = [
         name="user_detail",
     ),
 
+    path(
+        "analyses/",
+        views.analyses_view,
+        name="analyses",
+    ),
+
+    path(
+        "analyses/<int:pk>/",
+        views.analysis_detail_view,
+        name="analysis_detail",
+    ),
+
+    path(
+        "analyses/<int:pk>/delete/",
+        views.delete_analysis_view,
+        name="delete_analysis",
+    ),
+
 ]
