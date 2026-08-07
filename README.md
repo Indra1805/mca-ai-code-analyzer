@@ -219,7 +219,7 @@ This project follows:
 ## Clone Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/ai-code-analyzer.git
+git clone https://github.com/indra1805/mca-ai-code-analyzer.git
 
 cd ai-code-analyzer
 ```
