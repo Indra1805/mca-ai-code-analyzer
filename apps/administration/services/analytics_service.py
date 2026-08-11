@@ -17,7 +17,7 @@ class AnalyticsService:
         )
 
         trend = (
-            AnalyticsRepository.recent_analysis_trend()
+            AnalyticsRepository.recent_analysis_trend().__reversed__()
         )
 
         return {
